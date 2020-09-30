@@ -1,2 +1,2 @@
 # sensor_fusion_threading
-Threading module for localization with real-time sensor fusion when your company doesn't use ROS.  
+Real-time sensor fusion for localization with threading when your company doesn't allow ROS.  
