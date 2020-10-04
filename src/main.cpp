@@ -29,7 +29,7 @@ void check_files(ifstream& in_file, string& in_name, ofstream& out_file, string&
 int main()
 {
   // Check if we can open files
-  string in_file_name_ = "/home/gowithrobo/0_ups/projects/sensor_fusion_threading/data/drone_dataset.csv";
+  string in_file_name_ = "/home/gowithrobo/0_ups/projects/cpp_sensorfusion/data/drone_dataset.csv";
   ifstream in_file_(in_file_name_.c_str(), ifstream::in);
   string out_file_name_ = "output.txt";
   ofstream out_file_(out_file_name_.c_str(), ofstream::out);
@@ -85,6 +85,8 @@ int main()
   for (size_t k = 0; k < N; ++k) {
     ekf.predict(input_data_list[k]);
     ekf.update(input_data_list[k]);
+    ekf.x_ = ekf.x_update_;
+    ekf.P_ = ekf.P_update_;
     // output the estimation
     out_file_ << ekf.x_(0) << "\t";
     out_file_ << ekf.x_(1) << "\t";
@@ -100,19 +102,19 @@ int main()
     out_file_ << ekf.x_(11) << "\t";
     out_file_ << ekf.x_(12) << "\t";
     out_file_ << ekf.x_(13) << "\t";
-    out_file_ << ekf.x_(14) << "\t";
+    out_file_ << ekf.x_(14) << "\n";
   }
 
-  // // close files
-  // if (out_file_.is_open()) 
-  // {
-  //   out_file_.close();
-  // }
+  // close files
+  if (out_file_.is_open()) 
+  {
+    out_file_.close();
+  }
 
-  // if (in_file_.is_open()) 
-  // {
-  //   in_file_.close();
-  // }
+  if (in_file_.is_open()) 
+  {
+    in_file_.close();
+  }
 
   return 0;
 }
